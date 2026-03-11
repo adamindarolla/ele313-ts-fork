@@ -1,21 +1,6 @@
-14:42:59 **** Incremental Build of configuration Default for project Project ****
+16:08:15 **** Incremental Build of configuration Default for project Project ****
 make all 
-[1;34mCompiling main.c[0m
-main.c: In function 'main':
-main.c:46:15: warning: implicit declaration of function 'get_selector'; did you mean 'pselect'? [-Wimplicit-function-declaration]
-      selector=get_selector();
-               ^~~~~~~~~~~~
-               pselect
-[1;34mLinking build/Project_template.elf[0m
-[1;34mCreating build/Project_template.hex[0m
-[1;34mCreating build/Project_template.bin[0m
-[1;34mCreating build/Project_template.dmp[0m
+make: Nothing to be done for 'all'.
 
-   text	   data	    bss	    dec	    hex	filename
-  62228	   3068	  16868	  82164	  140f4	build/Project_template.elf
-[1;34mCreating build/Project_template.list[0m
-
-[1;34mDone[0m
-
-14:43:00 Build Finished. 0 errors, 1 warnings. (took 943ms)
+16:08:16 Build Finished. 0 errors, 0 warnings. (took 691ms)
 

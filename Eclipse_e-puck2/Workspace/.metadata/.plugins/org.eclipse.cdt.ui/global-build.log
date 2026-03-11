@@ -684,3 +684,247 @@ main.c:46:15: warning: implicit declaration of function 'get_selector'; did you 
 [1;34mCreating build/Project_template.list[0m
 
 [1;34mDone[0m
+15:05:56 **** Incremental Build of configuration Default for project Project ****
+make all 
+[1;34mCompiling main.c[0m
+main.c: In function 'main':
+main.c:45:6: error: 'str_length' undeclared (first use in this function); did you mean 'strnlen'?
+      str_length = sprintf(str, "Printing number %d!\n",value);
+      ^~~~~~~~~~
+      strnlen
+main.c:45:6: note: each undeclared identifier is reported only once for each function it appears in
+main.c:45:27: error: 'str' undeclared (first use in this function); did you mean 'sbrk'?
+      str_length = sprintf(str, "Printing number %d!\n",value);
+                           ^~~
+                           sbrk
+main.c:46:6: warning: implicit declaration of function 'e_send_uart1_char' [-Wimplicit-function-declaration]
+      e_send_uart1_char(str, str_length);
+      ^~~~~~~~~~~~~~~~~
+main.c:40:9: warning: unused variable 'wheelspeed' [-Wunused-variable]
+     int wheelspeed=500;
+         ^~~~~~~~~~
+main.c:39:9: warning: unused variable 'selector' [-Wunused-variable]
+     int selector;
+         ^~~~~~~~
+make: *** [../e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/rules.mk:217: build/obj/main.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+15:07:57 **** Incremental Build of configuration Default for project Project ****
+make all 
+[1;34mCompiling main.c[0m
+main.c: In function 'main':
+main.c:47:27: warning: passing argument 1 of 'sprintf' makes pointer from integer without a cast [-Wint-conversion]
+      str_length = sprintf(str, "Printing number %d!\n",value);
+                           ^~~
+In file included from /home/acse-lab/Documents/ele313-ts/Eclipse_e-puck2/Tools/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/stdio.h:29:0,
+                 from main.c:1:
+/home/acse-lab/Documents/ele313-ts/Eclipse_e-puck2/Tools/gcc-arm-none-eabi-7-2017-q4-major/arm-none-eabi/include/stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'int'
+ int _EXFUN(sprintf, (char *__restrict, const char *__restrict, ...)
+     ^
+main.c:48:6: warning: implicit declaration of function 'e_send_uart1_char' [-Wimplicit-function-declaration]
+      e_send_uart1_char(str, str_length);
+      ^~~~~~~~~~~~~~~~~
+main.c:40:9: warning: unused variable 'wheelspeed' [-Wunused-variable]
+     int wheelspeed=500;
+         ^~~~~~~~~~
+main.c:39:9: warning: unused variable 'selector' [-Wunused-variable]
+     int selector;
+         ^~~~~~~~
+main.c:47:19: warning: 'str' is used uninitialized in this function [-Wuninitialized]
+      str_length = sprintf(str, "Printing number %d!\n",value);
+                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1;34mLinking build/Project_template.elf[0m
+[1;34mCreating build/Project_template.hex[0m
+[1;34mCreating build/Project_template.bin[0m
+[1;34mCreating build/Project_template.dmp[0m
+
+   text	   data	    bss	    dec	    hex	filename
+  61620	   3068	  16860	  81548	  13e8c	build/Project_template.elf
+[1;34mCreating build/Project_template.list[0m
+
+[1;34mDone[0m
+15:10:58 **** Incremental Build of configuration Default for project Project ****
+make all 
+[1;34mCompiling main.c[0m
+main.c: In function 'main':
+main.c:45:6: warning: unused variable 'str' [-Wunused-variable]
+  int str;
+      ^~~
+main.c:44:9: warning: unused variable 'str_length' [-Wunused-variable]
+     int str_length;
+         ^~~~~~~~~~
+[1;34mLinking build/Project_template.elf[0m
+[1;34mCreating build/Project_template.hex[0m
+[1;34mCreating build/Project_template.bin[0m
+[1;34mCreating build/Project_template.dmp[0m
+
+   text	   data	    bss	    dec	    hex	filename
+  62484	   3084	  17500	  83068	  1447c	build/Project_template.elf
+[1;34mCreating build/Project_template.list[0m
+
+[1;34mDone[0m
+15:19:34 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
+15:34:01 **** Incremental Build of configuration Default for project Project ****
+make all 
+[1;34mCompiling main.c[0m
+main.c: In function 'main':
+main.c:46:15: warning: implicit declaration of function 'get_selector'; did you mean 'pselect'? [-Wimplicit-function-declaration]
+      selector=get_selector();
+               ^~~~~~~~~~~~
+               pselect
+[1;34mLinking build/Project_template.elf[0m
+[1;34mCreating build/Project_template.hex[0m
+[1;34mCreating build/Project_template.bin[0m
+[1;34mCreating build/Project_template.dmp[0m
+
+   text	   data	    bss	    dec	    hex	filename
+  62228	   3068	  16868	  82164	  140f4	build/Project_template.elf
+[1;34mCreating build/Project_template.list[0m
+
+[1;34mDone[0m
+15:37:43 **** Incremental Build of configuration Default for project Project ****
+make all 
+[1;34mCompiling main.c[0m
+main.c: In function 'main':
+main.c:45:6: warning: unused variable 'str' [-Wunused-variable]
+  int str;
+      ^~~
+main.c:44:9: warning: unused variable 'str_length' [-Wunused-variable]
+     int str_length;
+         ^~~~~~~~~~
+[1;34mLinking build/Project_template.elf[0m
+[1;34mCreating build/Project_template.hex[0m
+[1;34mCreating build/Project_template.bin[0m
+[1;34mCreating build/Project_template.dmp[0m
+
+   text	   data	    bss	    dec	    hex	filename
+  62484	   3084	  17500	  83068	  1447c	build/Project_template.elf
+[1;34mCreating build/Project_template.list[0m
+
+[1;34mDone[0m
+15:55:48 **** Incremental Build of configuration Default for project Project ****
+make all 
+[1;34mCompiling main.c[0m
+main.c: In function 'main':
+main.c:45:6: warning: unused variable 'str' [-Wunused-variable]
+  int str;
+      ^~~
+main.c:44:9: warning: unused variable 'str_length' [-Wunused-variable]
+     int str_length;
+         ^~~~~~~~~~
+main.c:54:19: warning: 'value' is used uninitialized in this function [-Wuninitialized]
+        str_length = sprintf(str, "Proximity Reading is %d!\n", value);
+        ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1;34mLinking build/Project_template.elf[0m
+[1;34mCreating build/Project_template.hex[0m
+[1;34mCreating build/Project_template.bin[0m
+[1;34mCreating build/Project_template.dmp[0m
+
+   text	   data	    bss	    dec	    hex	filename
+  62580	   3084	  17500	  83164	  144dc	build/Project_template.elf
+[1;34mCreating build/Project_template.list[0m
+
+[1;34mDone[0m
+15:57:15 **** Incremental Build of configuration Default for project Project ****
+make all 
+[1;34mCompiling main.c[0m
+main.c: In function 'main':
+main.c:54:34: warning: too many arguments for format [-Wformat-extra-args]
+        str_length = sprintf(str, "Proximity Reading of",i,"is %d!\n", value);
+                                  ^~~~~~~~~~~~~~~~~~~~~~
+main.c:45:6: warning: unused variable 'str' [-Wunused-variable]
+  int str;
+      ^~~
+main.c:44:9: warning: unused variable 'str_length' [-Wunused-variable]
+     int str_length;
+         ^~~~~~~~~~
+main.c:54:19: warning: 'value' is used uninitialized in this function [-Wuninitialized]
+        str_length = sprintf(str, "Proximity Reading of",i,"is %d!\n", value);
+        ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1;34mLinking build/Project_template.elf[0m
+[1;34mCreating build/Project_template.hex[0m
+[1;34mCreating build/Project_template.bin[0m
+[1;34mCreating build/Project_template.dmp[0m
+
+   text	   data	    bss	    dec	    hex	filename
+  62596	   3084	  17500	  83180	  144ec	build/Project_template.elf
+[1;34mCreating build/Project_template.list[0m
+
+[1;34mDone[0m
+16:02:26 **** Incremental Build of configuration Default for project Project ****
+make all 
+[1;34mCompiling main.c[0m
+main.c: In function 'main':
+main.c:54:34: warning: too many arguments for format [-Wformat-extra-args]
+        str_length = sprintf(str, "Proximity Reading of %d",i," is %d!\n", value);
+                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+main.c:45:6: warning: unused variable 'str' [-Wunused-variable]
+  int str;
+      ^~~
+main.c:44:9: warning: unused variable 'str_length' [-Wunused-variable]
+     int str_length;
+         ^~~~~~~~~~
+main.c:54:19: warning: 'value' is used uninitialized in this function [-Wuninitialized]
+        str_length = sprintf(str, "Proximity Reading of %d",i," is %d!\n", value);
+        ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1;34mLinking build/Project_template.elf[0m
+[1;34mCreating build/Project_template.hex[0m
+[1;34mCreating build/Project_template.bin[0m
+[1;34mCreating build/Project_template.dmp[0m
+
+   text	   data	    bss	    dec	    hex	filename
+  62612	   3084	  17500	  83196	  144fc	build/Project_template.elf
+[1;34mCreating build/Project_template.list[0m
+
+[1;34mDone[0m
+16:02:51 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
+16:03:09 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
+16:03:56 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
+16:04:50 **** Incremental Build of configuration Default for project Project ****
+make all 
+[1;34mCompiling main.c[0m
+main.c: In function 'main':
+main.c:45:6: warning: unused variable 'str' [-Wunused-variable]
+  int str;
+      ^~~
+main.c:44:9: warning: unused variable 'str_length' [-Wunused-variable]
+     int str_length;
+         ^~~~~~~~~~
+main.c:54:19: warning: 'value' is used uninitialized in this function [-Wuninitialized]
+        str_length = sprintf(str, "Proximity Reading of %d is %d!\n",i, value);
+        ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1;34mLinking build/Project_template.elf[0m
+[1;34mCreating build/Project_template.hex[0m
+[1;34mCreating build/Project_template.bin[0m
+[1;34mCreating build/Project_template.dmp[0m
+
+   text	   data	    bss	    dec	    hex	filename
+  62596	   3084	  17500	  83180	  144ec	build/Project_template.elf
+[1;34mCreating build/Project_template.list[0m
+
+[1;34mDone[0m
+16:05:47 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
+16:06:37 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
+16:07:32 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
+16:07:46 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
+16:07:59 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
+16:08:15 **** Incremental Build of configuration Default for project Project ****
+make all 
+make: Nothing to be done for 'all'.
