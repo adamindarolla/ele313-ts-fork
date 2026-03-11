@@ -36,20 +36,29 @@ int main(void)
     //Motors
     motors_init();
 
+    int selector;
+    int wheelspeed=500;
     /* Infinite loop. */
     while (1)
     {
-    	if (get_calibrated_prox(0)>=200 || get_calibrated_prox(7)>=200)
-    	{
-    		set_front_led(2);
-    		left_motor_set_speed(500);
-    		right_motor_set_speed(-500);
-    	}
-    	else
-    	{
-    		left_motor_set_speed(500);
-    		right_motor_set_speed(500);
-    	}
+    	left_motor_set_speed(wheelspeed);
+    	right_motor_set_speed(-wheelspeed);
+    	selector=get_selector();
+    			while (selector>0)
+    			{
+
+    		set_body_led(1);
+    		chThdSleepMilliseconds(300);
+    		set_body_led(0);
+    		chThdSleepMilliseconds(300);
+
+    		if (selector==1){
+    			wheelspeed=wheelspeed*-1;
+
+    		}
+    		--selector;
+    			}
+
     }
 }
 
