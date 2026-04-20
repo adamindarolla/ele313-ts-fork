@@ -40,64 +40,85 @@ int main(void)
     bool wallsexplored=0;
     bool wall; // is this the boolean for if its left or right wall following??
     bool haveifoundawallyet=0; // this is for if its found a wall yet
-    int distnorth;
+    int distnorth; // distances travelled in each direction
     int distsouth;
     int disteast;
     int distwest;
     int SensorValue[8]; // array for sensor values
-    
-    // we are palm beach pete
-void minAndMaxFunction(int arr[], string fName[], string lName[], int& min, int& max, int siz, int& minPosition, int& maxPosition)
 
-    
+
+	// MOTORS
+	void left_motor_set_speed(int motor_speed);
+	void right_motor_set_speed(int motor_speed)
+
+	//this is from gemini
+	enum RobotState { NOWALL, FOUNDWALL };
+	RobotState currentState = NOWALL;
+
+	int followSide = -1; // 0 for Right, 1 for Left
+	int threshold = 150; // Distance to trigger "Wall Found"
+
+	
     // Task 1
-    
-    while(1) {
-        for (unsigned int i = 0; i < 8; i++) {
-            SensorValue[i] = get_prox(i);
-        }
-    delay_ms(100);
+    // check if its next to a wall
+	// if yes - go forwards
+	// if no - enter wall following mode
+	// decide which side the wall is on
+
+	//infinite goon loop Ithis is for whole thing)
+	
+	while(1) {
+		
+    //check if any walls nearby and which is strongest sensor
+	int maxVal = 0; //
+	int strongestSensor = -1; // Start with -1 (meaning no obstacle seen) - ok I do not get this bit
+	int threshold = 50; // Minimum value before sensors kick in
+		
+	for (int i = 0; i < 8; i++) {
+    int currentVal = get_prox(i);
+    if (currentVal > maxVal) {
+        maxVal = currentVal;
+        strongestSensor = i;
     }
-    //switch int SensorValue[i]{
-    //case SensorValue[1] 
-    
-        
-    //check if no walls nearby
-    for (int i = 0; i < siz; i++)
-	{
-		if (min > arr[i])
-		{
-			min = arr[i];
-			minPosition = i;
-		}
-
-		if (arr[i] > max)
-		{
-			max = arr[i];
-			maxPosition = i;
-
-// finding which side of puck max sensor reading is on
-    switch (maxPosition) {
+}
+		if (currentState == NOWALL) {
+			if (maxVal > threshold) {
+			// this is when it has detected a wall
+			// finding which side of puck max sensor reading is on
+    switch (strongestSensor) {
         case 0
-			bool wall = 0; //right
+			followSide = 0; //right
+			currentState = FOLLOWING;
         case 1
-			bool wall = 0;
+			followSide = 0;
+			currentState = FOLLOWING;
         case 2
-			bool wall = 0;
+			followSide = 0;
+			currentState = FOLLOWING;
         case 3
-			bool wall = 0;
+			followSide = 0;
+			currentState = FOLLOWING;
 		case 4
-			bool wall = 1; //left
+			followSide = 1; //left
+			currentState = FOLLOWING;
         case 5
-			bool wall = 1;
+			followSide = 1;
+			currentState = FOLLOWING;
         case 6
-			bool wall = 1;
+			followSide = 1;
+			currentState = FOLLOWING;
         case 7
-			bool wall = 1;
-	}
+			followSide = 1;
+			currentState = FOLLOWING;
+	}	else   {
+			// no wall detected - set motor speed to arbitrary value
+  void left_motor_set_speed(int 200);
+  void right_motor_set_speed(int 200); 
+		
+
  
 
-
+// this is where we need the bit for wall following
     
     			}
 
