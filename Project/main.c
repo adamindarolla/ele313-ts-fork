@@ -36,27 +36,66 @@ int main(void)
     //Motors
     motors_init();
 
-    int selector;
-    int wheelspeed=500;
-    /* Infinite loop. */
-    while (1)
-    {
-    	left_motor_set_speed(wheelspeed);
-    	right_motor_set_speed(-wheelspeed);
-    	selector=get_selector();
-    			while (selector>0)
-    			{
+// our stuff
+    bool wallsexplored=0;
+    bool wall; // is this the boolean for if its left or right wall following??
+    bool haveifoundawallyet=0; // this is for if its found a wall yet
+    int distnorth;
+    int distsouth;
+    int disteast;
+    int distwest;
+    int SensorValue[8]; // array for sensor values
+    
+    // we are palm beach pete
+void minAndMaxFunction(int arr[], string fName[], string lName[], int& min, int& max, int siz, int& minPosition, int& maxPosition)
 
-    		set_body_led(1);
-    		chThdSleepMilliseconds(300);
-    		set_body_led(0);
-    		chThdSleepMilliseconds(300);
+    
+    // Task 1
+    
+    while(1) {
+        for (unsigned int i = 0; i < 8; i++) {
+            SensorValue[i] = get_prox(i);
+        }
+    delay_ms(100);
+    }
+    //switch int SensorValue[i]{
+    //case SensorValue[1] 
+    
+        
+    //check if no walls nearby
+    for (int i = 0; i < siz; i++)
+	{
+		if (min > arr[i])
+		{
+			min = arr[i];
+			minPosition = i;
+		}
 
-    		if (selector==1){
-    			wheelspeed=wheelspeed*-1;
+		if (arr[i] > max)
+		{
+			max = arr[i];
+			maxPosition = i;
 
-    		}
-    		--selector;
+// want to use case / switch for finding which side of puck max position is on
+    switch (maxPosition) {
+        case 0
+        case 1
+        case 2
+        case 3
+    //i did not finish this need to go to class
+    else
+
+    // decide if following right or left wall
+
+    int SensorValue0 = get_prox(unsigned int 0);
+    int SensorValue7 = get_prox(unsigned int 7);
+
+    if SensorValue 0 <= SensorValue 7
+    wall = 1 ; // following right wall
+    else
+    wall = 0 ; //following left wall
+
+    
     			}
 
     }
