@@ -76,24 +76,27 @@ void minAndMaxFunction(int arr[], string fName[], string lName[], int& min, int&
 			max = arr[i];
 			maxPosition = i;
 
-// want to use case / switch for finding which side of puck max position is on
+// finding which side of puck max sensor reading is on
     switch (maxPosition) {
         case 0
+			bool wall = 0; //right
         case 1
+			bool wall = 0;
         case 2
+			bool wall = 0;
         case 3
-    //i did not finish this need to go to class
-    else
+			bool wall = 0;
+		case 4
+			bool wall = 1; //left
+        case 5
+			bool wall = 1;
+        case 6
+			bool wall = 1;
+        case 7
+			bool wall = 1;
+	}
+ 
 
-    // decide if following right or left wall
-
-    int SensorValue0 = get_prox(unsigned int 0);
-    int SensorValue7 = get_prox(unsigned int 7);
-
-    if SensorValue 0 <= SensorValue 7
-    wall = 1 ; // following right wall
-    else
-    wall = 0 ; //following left wall
 
     
     			}
