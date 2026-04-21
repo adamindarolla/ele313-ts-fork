@@ -62,9 +62,8 @@ int main(void)
 	enum RobotState { NOWALL, FOUNDWALL, EXPLORING };
 	enum RobotState currentState = NOWALL;
 
-	int followSide = -1; // 0 for Right, 1 for Left
+	int followSide = 0; // 1 for Right, -1 for Left
 	int threshold = 150; // Distance to trigger "Wall Found"
-	int thresholdRear = 150; // in case we wish to set this seperately for performance reasons
 	int maxVal = 0;
 	int strongestSensor;
 	
@@ -83,7 +82,6 @@ int main(void)
 		
 	for (int i = 0; i < 8; i++) {
     int currentVal = get_prox(i);
-	int SensorValue[i] = get_prox(i);
     if (currentVal > maxVal) {
         maxVal = currentVal;
         strongestSensor = i;
@@ -95,50 +93,59 @@ int main(void)
 			// finding which side of puck max sensor reading is on
     switch (strongestSensor) {
         case 0
-			followSide = 0; //right
+			followSide = 1; //right
 			currentState = FOUNDWALL;
         case 1
-			followSide = 0;
+			followSide = 1;
 			currentState = FOUNDWALL;
         case 2
-			followSide = 0;
+			followSide = 1;
 			currentState = FOUNDWALL;
         case 3
-			followSide = 0;
+			followSide = 1;
 			currentState = FOUNDWALL;
 		case 4
-			followSide = 1; //left
+			followSide = -1; //left
 			currentState = FOUNDWALL;
         case 5
-			followSide = 1;
+			followSide = -1;
 			currentState = FOUNDWALL;
         case 6
-			followSide = 1;
+			followSide = -1;
 			currentState = FOUNDWALL;
         case 7
-			followSide = 1;
+			followSide = -1;
 			currentState = FOUNDWALL;
-	}	
+	}
+				// sets which sensors are preffered side and offside
+		if (followSide == 1){
+			int prefFront = 0;
+			int prefCorner = 1;
+			int prefSide = 2;
+			int prefBack = 3;
+			int offFront = 7;
+			int offCorner = 6;
+			int offSide = 5:
+			int offBack = 4;
+		} else {
+			int prefFront = 7;
+			int prefCorner = 6;
+			int prefSide = 5;
+			int prefBack = 4;
+			int offFront = 0;
+			int offCorner = 1;
+			int offSide = 2:
+			int offBack = 3;
+		}	
 	}	else   {
 			// no wall detected - set motor speed to arbitrary value
 left_motor_set_speed(1000);
 right_motor_set_speed(1000); 
     			}	
 	}
-			 
+
 
 // this is where we need the bit for wall following
-
-// check if robot is close enough to the wall
-
-// check if robot is far enough away from any wall
-
-//if robot is near 2 walls, turn relative to proximity of both walls
-
-// if robot is too close to both walls, turn around
-
-// if wall is infront of robot turn away from desired side
-
 		if (currentstate==FOUNDWALL) {
 			// check if robot is close enough to the wall, turn towards wall
 			if (prefSide<minirread){
@@ -158,48 +165,11 @@ right_motor_set_speed(1000);
 			}
 			// if robot is too close to both walls, turn around 180 ish degrees
 
+			// if wall is infront of robot, turn away from desired side
 
-
-
-
-
-
-
-
-		// exploration mode
-	if (currentState == EXPLORING) {
-	// check if wall is reached
-		if SensorValue[0] > threshold || SensorValue[7] > threshold {
-			left_motor_set_speed(500);
-			right_motor_set_speed(-500);
-			delay_ms(500);
-			currentState = FOUNDWALL;
-
-				// Here we need it to just do the wall following function for a small amount of time - in case there is any obstacle
-				// or if it has not rotated exactly 90 degrees
-				// then it turns 90 degrees
-
-			delay_ms(3000);
-			right_motor_set_speed(-500);
-			left_motor_set_speed(500);
-			delay_ms(500);
-
-			if SensorValue[3] - SensorValue[4] <= thresholdRear  || SensorValue[4] - SensorValue[3] <= thresholdRear {
-				currentState = EXPLORING;
-
-						}
-		
-					}
-				}
-			}
+			
 		}
 
-
-		// needs to have an understanding of how far the robot has travelled in each axis
-
-	
-	}
-		
 
 		
 	}
