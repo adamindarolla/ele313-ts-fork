@@ -47,13 +47,11 @@ int main(void)
     int SensorValue[8]; // array for sensor values
 
 
-	// MOTORS
-	void left_motor_set_speed(int motor_speed);
-	void right_motor_set_speed(int motor_speed)
+	
 
 	//this is from gemini
 	enum RobotState { NOWALL, FOUNDWALL };
-	RobotState currentState = NOWALL;
+	enum RobotState currentState = NOWALL;
 
 	int followSide = -1; // 0 for Right, 1 for Left
 	int threshold = 150; // Distance to trigger "Wall Found"
@@ -88,28 +86,28 @@ int main(void)
     switch (strongestSensor) {
         case 0
 			followSide = 0; //right
-			currentState = FOLLOWING;
+			currentState = FOUNDWALL;
         case 1
 			followSide = 0;
-			currentState = FOLLOWING;
+			currentState = FOUNDWALL;
         case 2
 			followSide = 0;
-			currentState = FOLLOWING;
+			currentState = FOUNDWALL;
         case 3
 			followSide = 0;
-			currentState = FOLLOWING;
+			currentState = FOUNDWALL;
 		case 4
 			followSide = 1; //left
-			currentState = FOLLOWING;
+			currentState = FOUNDWALL;
         case 5
 			followSide = 1;
-			currentState = FOLLOWING;
+			currentState = FOUNDWALL;
         case 6
 			followSide = 1;
-			currentState = FOLLOWING;
+			currentState = FOUNDWALL;
         case 7
 			followSide = 1;
-			currentState = FOLLOWING;
+			currentState = FOUNDWALL;
 	}	else   {
 			// no wall detected - set motor speed to arbitrary value
   void left_motor_set_speed(int 200);
