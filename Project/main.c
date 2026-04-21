@@ -50,12 +50,13 @@ int main(void)
 	
 
 	//this is from gemini
-	enum RobotState { NOWALL, FOUNDWALL };
+	enum RobotState { NOWALL, FOUNDWALL, EXPLORING };
 	enum RobotState currentState = NOWALL;
 
 	int followSide = -1; // 0 for Right, 1 for Left
 	int threshold = 150; // Distance to trigger "Wall Found"
-
+	int maxVal = 0;
+	int strongestSensor;
 	
     // Task 1
     // check if its next to a wall
@@ -68,9 +69,7 @@ int main(void)
 	while(1) {
 		
     //check if any walls nearby and which is strongest sensor
-	int maxVal = 0; //
-	int strongestSensor = -1; // Start with -1 (meaning no obstacle seen) - ok I do not get this bit
-	int threshold = 50; // Minimum value before sensors kick in
+	int maxVal = 0; 
 		
 	for (int i = 0; i < 8; i++) {
     int currentVal = get_prox(i);
@@ -78,7 +77,7 @@ int main(void)
         maxVal = currentVal;
         strongestSensor = i;
     }
-}
+	}
 		if (currentState == NOWALL) {
 			if (maxVal > threshold) {
 			// this is when it has detected a wall
@@ -110,13 +109,16 @@ int main(void)
 			currentState = FOUNDWALL;
 	}	else   {
 			// no wall detected - set motor speed to arbitrary value
-  void left_motor_set_speed(int 200);
-  void right_motor_set_speed(int 200); 
+left_motor_set_speed(1000);
+right_motor_set_speed(1000); 
 		
 
  
 
 // this is where we need the bit for wall following
+
+
+
     
     			}
 
