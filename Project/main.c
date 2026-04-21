@@ -170,6 +170,40 @@ right_motor_set_speed(1000);
 			
 		}
 
+		// exploration mode
+	if (currentState == EXPLORING) {
+	// check if wall is reached
+		if SensorValue[0] > threshold || SensorValue[7] > threshold {
+			left_motor_set_speed(500);
+			right_motor_set_speed(-500);
+			delay_ms(500);
+			currentState = FOUNDWALL;
+
+				// Here we need it to just do the wall following function for a small amount of time - in case there is any obstacle
+				// or if it has not rotated exactly 90 degrees
+				// then it turns 90 degrees
+
+			delay_ms(3000);
+			right_motor_set_speed(-500);
+			left_motor_set_speed(500);
+			delay_ms(500);
+
+			if SensorValue[3] - SensorValue[4] <= thresholdRear  || SensorValue[4] - SensorValue[3] <= thresholdRear {
+				currentState = EXPLORING;
+
+						}
+		
+					}
+				}
+			}
+		}
+
+
+		// needs to have an understanding of how far the robot has travelled in each axis
+
+	
+	}
+		
 
 		
 	}
