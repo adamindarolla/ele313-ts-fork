@@ -51,6 +51,8 @@ int main(void)
     int disteast;
     int distwest;
     int SensorValue[8]; // array for sensor values
+	int minirread = 300;
+	int maxirread = 1000;
 
 
 	
@@ -113,23 +115,28 @@ int main(void)
         case 7
 			followSide = 1;
 			currentState = FOUNDWALL;
+	}	
 	}	else   {
 			// no wall detected - set motor speed to arbitrary value
 left_motor_set_speed(1000);
 right_motor_set_speed(1000); 
-		
-
- 
+    			}	
+	}
+			 
 
 // this is where we need the bit for wall following
 
+// check if robot is close enough to the wall
 
+// check if robot is far enough away from any wall
 
-    
-    			}
+//if robot is near 2 walls, turn relative to proximity of both walls
 
-    }
-}
+// if robot is too close to both walls, turn around
+
+// if wall is infront of robot turn away from desired side
+		
+	}
 
 #define STACK_CHK_GUARD 0xe2dee396
 uintptr_t __stack_chk_guard = STACK_CHK_GUARD;
