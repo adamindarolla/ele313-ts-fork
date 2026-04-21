@@ -53,6 +53,7 @@ int main(void)
     int SensorValue[8]; // array for sensor values
 	int minirread = 300;
 	int maxirread = 1000;
+	
 
 
 	
@@ -147,11 +148,21 @@ right_motor_set_speed(1000);
 // this is where we need the bit for wall following
 		if (currentstate==FOUNDWALL) {
 			// check if robot is close enough to the wall, turn towards wall
-			if (
+			if (prefSide<minirread){
+				//turn towards wall
+			}
 			// check if robot is far enough away from any wall, turn away from wall
-
+			if (prefSide>maxirread){
+				//turn away from preffered wall
+			}
+			if (offSide>maxirread){
+				// turn away from offside wall
+			}
 			//if robot is near 2 walls, turn relative to proximity of both walls
-
+			if (prefSide>maxirread && offSide>maxirread){
+				// if robot is too close to both walls, turn around 180 ish degrees
+				
+			}
 			// if robot is too close to both walls, turn around 180 ish degrees
 
 			// if wall is infront of robot, turn away from desired side
@@ -159,17 +170,7 @@ right_motor_set_speed(1000);
 			
 		}
 
-// check if robot is close enough to the wall, turn towards wall
 
-// check if robot is far enough away from any wall, turn away from wall
-
-//if robot is near 2 walls, turn relative to proximity of both walls
-
-// if robot is too close to both walls, turn around 180 ish degrees
-
-// if wall is infront of robot, turn away from desired side
-
-// if
 		
 	}
 
