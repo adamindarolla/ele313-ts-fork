@@ -12,6 +12,10 @@
 #include "sensors/proximity.h"
 #include "motors.h"
 
+
+
+// adam was here
+
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
 CONDVAR_DECL(bus_condvar);
