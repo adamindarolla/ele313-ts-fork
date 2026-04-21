@@ -14,7 +14,7 @@
 
 
 
-// adam was here
+// adam was not here
 
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
