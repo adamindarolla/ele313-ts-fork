@@ -80,11 +80,6 @@ int main(void){
 
 // our stuff
     bool wallsexplored=0;
-    bool haveifoundawallyet=0; // this is for if its found a wall yet
-    int distnorth; // distances travelled in each direction
-    int distsouth;
-    int disteast;
-    int distwest;
     int SensorValue[8]; // array for sensor values
 	int minirread = 300;
 	int maxirread = 1000;
