@@ -55,6 +55,7 @@ int main(void)
     int SensorValue[8]; // array for sensor values
 	int minirread = 300;
 	int maxirread = 1000;
+	float wheelRatio = 1; // if less than 1, preffered side wheel spins slower therefore turns towards preffered wall
 	
 
 
@@ -152,19 +153,43 @@ right_motor_set_speed(1000);
 			
 			if (get_prox(prefSide)<minirread){
 				//turn towards wall
+				float wheelratio = 0.9;
 			} else if ((get_prox(prefSide)>maxirread && get_prox(offSide)<maxirread) || (get_prox(prefCorner)>maxirread && get_prox(offCorner)<maxirread)){
 				//turn away from preffered wall
-			} else if ((get_prox(offSide)>maxirread && get_prox(prefSide)<maxirread) ||(get_prox(offCorner)>maxirread && get_prox(prefCorner)<maxirread)){
+				float wheelratio = 1.1;
+			} else if ((get_prox(offSide)>maxirread && get_prox(prefSide)<maxirread) || (get_prox(offCorner)>maxirread && get_prox(prefCorner)<maxirread)){
 				// turn away from offside wall
-			} else if ((get_prox(prefSide)>maxirread && get_prox(offSide)>maxirread)||(get_prox(prefCorner)>maxirread && get_prox(offCorner)>maxirread)){
+				float wheelratio = 0.9;
+			} else if ((get_prox(prefSide)>maxirread && get_prox(offSide)>maxirread) || (get_prox(prefCorner)>maxirread && get_prox(offCorner)>maxirread)){
 				// if robot is too close to both walls, turn around 180 ish degrees
-				
+				left_motor_set_speed(-500 * followSide);
+				right_motor_set_speed(500 * followSide); 
+				chThdSleepMilliseconds(1000); // 1 second is abritary amount of time
 			} else if (get_prox(prefFront)>maxirread || (get_prox(offFront)>maxirread)){
                 // if wall is infront of robot, turn away from desired side
+				left_motor_set_speed(-500 * followSide);
+				right_motor_set_speed(500 * followSide); 
+				chThdSleepMilliseconds(500); // 1 second is abritary amount of time
             }
 			// if wall is infront of robot, turn away from desired side
-
 			
+			if (followsSide ==-1){
+				if (wheelRatio<1){
+					left_motor_set_speed(1000 * wheelRatio);
+					right_motor_set_speed(1000); 
+				}else{
+					left_motor_set_speed(1000);
+					right_motor_set_speed(1000 / wheelRatio); 
+				}	
+			} else if (followside ==1){
+				if (wheelRatio<1){
+					left_motor_set_speed(1000 * wheelRatio);
+					right_motor_set_speed(1000 * wheelRatio); 
+				}else{
+					left_motor_set_speed(1000 / wheelRatio);
+					right_motor_set_speed(1000); 
+				}
+			}
 		}
 			// if robot is too close to both walls, turn around 180 ish degrees
 
