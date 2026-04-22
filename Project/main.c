@@ -15,6 +15,7 @@ messagebus_t bus;
 MUTEX_DECL(bus_lock);
 CONDVAR_DECL(bus_condvar);
 
+// declare wall following mode
 void follow_wall() {
 			
 			if (get_prox(prefSide)<minirread){
@@ -49,7 +50,7 @@ void follow_wall() {
 				}	
 			} else if (followside ==1){
 				if (wheelRatio<1){
-					left_motor_set_speed(1000 * wheelRatio);
+					left_motor_set_speed(1000);
 					right_motor_set_speed(1000 * wheelRatio); 
 				} else {
 					left_motor_set_speed(1000 / wheelRatio);
@@ -88,6 +89,7 @@ int main(void){
 	int minirread = 300;
 	int maxirread = 1000;
 	float wheelRatio = 1; // if less than 1, preffered side wheel spins slower therefore turns towards preffered wall
+	int32_t maxwheelsteps = 25000; // rough guess of number of steps around box
 	
 	enum RobotState { NOWALL, FOUNDWALL, EXPLORING };
 	enum RobotState currentState = NOWALL;
@@ -174,49 +176,16 @@ int main(void){
     		}	
 	}
 // this is where we need the bit for wall following
-		if (currentstate==FOUNDWALL) {
-			
-			if (get_prox(prefSide)<minirread){
-				//turn towards wall
-				float wheelratio = 0.9;
-			} else if ((get_prox(prefSide)>maxirread && get_prox(offSide)<maxirread) || (get_prox(prefCorner)>maxirread && get_prox(offCorner)<maxirread)){
-				//turn away from preffered wall
-				float wheelratio = 1.1;
-			} else if ((get_prox(offSide)>maxirread && get_prox(prefSide)<maxirread) || (get_prox(offCorner)>maxirread && get_prox(prefCorner)<maxirread)){
-				// turn away from offside wall
-				float wheelratio = 0.9;
-			} else if ((get_prox(prefSide)>maxirread && get_prox(offSide)>maxirread) || (get_prox(prefCorner)>maxirread && get_prox(offCorner)>maxirread)){
-				// if robot is too close to both walls, turn around 180 ish degrees
-				left_motor_set_speed(-500 * followSide);
-				right_motor_set_speed(500 * followSide); 
-				chThdSleepMilliseconds(1000); // 1 second is abritary amount of time
-			} else if (get_prox(prefFront)>maxirread || (get_prox(offFront)>maxirread)){
-                // if wall is infront of robot, turn away from desired side
-				left_motor_set_speed(-500 * followSide);
-				right_motor_set_speed(500 * followSide); 
-				chThdSleepMilliseconds(500); // 1 second is abritary amount of time
-            }
-
-			// sets wheel speeds based case seen before
-			if (followsSide ==-1){
-				if (wheelRatio<1){
-					left_motor_set_speed(1000 * wheelRatio);
-					right_motor_set_speed(1000); 
-				}else{
-					left_motor_set_speed(1000);
-					right_motor_set_speed(1000 / wheelRatio); 
-				}	
-			} else if (followside ==1){
-				if (wheelRatio<1){
-					left_motor_set_speed(1000 * wheelRatio);
-					right_motor_set_speed(1000 * wheelRatio); 
-				} else {
-					left_motor_set_speed(1000 / wheelRatio);
-					right_motor_set_speed(1000); 
-				}
+		if (currentstate==FOUNDWALL && wallsexplored==0 ) {
+			left_motor_set_pos(0);
+			right_motor_set_pos(0);
+			while (left_motor_get_pos()<maxwheelsteps && right_motor_get_pos()<maxwheelsteps){
+				follow_wall()
+				
 			}
-		}	
+			bool wallsexplored = 1;
 		}
+		
 
 		// exploration mode
 	if (currentState == EXPLORING) {
