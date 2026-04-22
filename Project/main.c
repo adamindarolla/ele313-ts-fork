@@ -10,6 +10,10 @@
 #include "spi_comm.h"
 #include "sensors/proximity.h"
 #include "motors.h"
+#include "epuck1x/uart/e_uart_char.h"
+#include "stdio.h"
+#include "serial_comm.h"
+#include "selector.h"
 
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
@@ -78,6 +82,10 @@ int main(void){
     //Motors
     motors_init();
 
+	//Bluetooth
+	serial_start();
+
+
 // our stuff
     bool wallsexplored=0;
     int SensorValue[8]; // array for sensor values
@@ -102,7 +110,7 @@ int main(void){
 
 	//infinite goon loop Ithis is for whole thing)
 	
-	while(1) {
+	while(get_selector()==1) {
 		
     //check if any walls nearby and which is strongest sensor
 	int maxVal = 0; 
@@ -116,6 +124,12 @@ int main(void){
 	}
 		if (currentState == NOWALL) {
 			if (maxVal > threshold) {
+				char str1[100];
+				int str1_length;
+				str1_length = sprintf(str1, "Wall Detected\n");
+				e_send_uart1_char(str1, str1_length);
+
+				
 			// this is when it has detected a wall
 			// finding which side of puck max sensor reading is on
     switch (strongestSensor) {
@@ -180,6 +194,11 @@ int main(void){
 			}
 			bool wallsexplored = 1;
 			currentState = EXPLORING;
+				char str2[100];
+				int str2_length;
+				str2_length = sprintf(str2, "Entering Explore Mode\n");
+				e_send_uart1_char(str2, str2_length);
+			
 		}
 		
 
