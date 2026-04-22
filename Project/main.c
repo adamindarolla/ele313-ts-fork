@@ -127,7 +127,7 @@ int main(void)
 			int prefBack = 3;
 			int offFront = 7;
 			int offCorner = 6;
-			int offSide = 5:
+			int offSide = 5;
 			int offBack = 4;
 		} else {
 			int prefFront = 7;
@@ -136,7 +136,7 @@ int main(void)
 			int prefBack = 4;
 			int offFront = 0;
 			int offCorner = 1;
-			int offSide = 2:
+			int offSide = 2;
 			int offBack = 3;
 		}	
 	}	else   {
@@ -149,22 +149,23 @@ right_motor_set_speed(1000);
 
 // this is where we need the bit for wall following
 		if (currentstate==FOUNDWALL) {
-			// check if robot is close enough to the wall, turn towards wall
-			if (prefSide<minirread){
+			
+			if (get_prox(prefSide)<minirread){
 				//turn towards wall
-			}
-			// check if robot is far enough away from any wall, turn away from wall
-			if (prefSide>maxirread){
+			} else if ((get_prox(prefSide)>maxirread && get_prox(offSide)<maxirread) || (get_prox(prefCorner)>maxirread && get_prox(offCorner)<maxirread)){
 				//turn away from preffered wall
-			}
-			if (offSide>maxirread){
+			} else if ((get_prox(offSide)>maxirread && get_prox(prefSide)<maxirread) ||(get_prox(offCorner)>maxirread && get_prox(prefCorner)<maxirread)){
 				// turn away from offside wall
-			}
-			//if robot is near 2 walls, turn relative to proximity of both walls
-			if (prefSide>maxirread && offSide>maxirread){
+			} else if ((get_prox(prefSide)>maxirread && get_prox(offSide)>maxirread)||(get_prox(prefCorner)>maxirread && get_prox(offCorner)>maxirread)){
 				// if robot is too close to both walls, turn around 180 ish degrees
 				
-			}
+			} else if (get_prox(prefFront)>maxirread || (get_prox(offFront)>maxirread)){
+                // if wall is infront of robot, turn away from desired side
+            }
+			// if wall is infront of robot, turn away from desired side
+
+			
+		}
 			// if robot is too close to both walls, turn around 180 ish degrees
 
 			// if wall is infront of robot, turn away from desired side
