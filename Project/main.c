@@ -179,37 +179,40 @@ int main(void){
 		if (currentstate==FOUNDWALL && wallsexplored==0 ) {
 			left_motor_set_pos(0);
 			right_motor_set_pos(0);
-			while (left_motor_get_pos()<maxwheelsteps && right_motor_get_pos()<maxwheelsteps){
+			while (left_motor_get_pos()< maxwheelsteps && right_motor_get_pos()< maxwheelsteps){
 				follow_wall()
 				
 			}
 			bool wallsexplored = 1;
+			currentState = EXPLORING;
 		}
 		
 
 		// exploration mode
-	if (currentState == EXPLORING) {
+	if (wallsexplored) {
 	// check if wall is reached
-		if SensorValue[0] > threshold || SensorValue[7] > threshold {
-			left_motor_set_speed(500);
-			right_motor_set_speed(-500);
-			delay_ms(500);
+		if (SensorValue[0] > threshold || SensorValue[7] > threshold || SensorValue[1] > threshold || SensorValue[2] > threshold || SensorValue[5] > threshold ||SensorValue[6] > threshold || ) {
 			currentState = FOUNDWALL;
+			left_motor_set_pos(0);
+			right_motor_set_pos(0);
+			while (left_motor_get_pos()<maxwheelsteps2 && right_motor_get_pos()<maxwheelsteps2){
+				follow_wall()
+					}
 
 				// Here we need it to just do the wall following function for a small amount of time - in case there is any obstacle
 				// or if it has not rotated exactly 90 degrees
 				// then it turns 90 degrees
 
-			delay_ms(3000);
-			right_motor_set_speed(-500);
-			left_motor_set_speed(500);
+			right_motor_set_speed(500*followSide);
+			left_motor_set_speed(-500*followSide);
 			delay_ms(500);
-
-			if fabs( SensorValue[3] - SensorValue[4]) <= thresholdRear {
-				currentState = EXPLORING;
+			currentState = EXPLORING;
+			followSide= -followSide;
 
 						}
-		
+			else
+			left_motor_set_speed(1000);
+			left_motor_set_speed(1000);
 					}
 				}
 			}
