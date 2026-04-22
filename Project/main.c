@@ -14,7 +14,7 @@
 
 
 
-// adam was not here
+// adam was here
 
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
@@ -39,6 +39,8 @@ int main(void)
     clear_leds();
     spi_comm_start();
 
+	rgb_led_name_t allRGBs[] = {LED2, LED4, LED6, LED8};
+
     //Motors
     motors_init();
 
@@ -58,7 +60,7 @@ int main(void)
 
 	
 
-	//this is from gemini
+	
 	enum RobotState { NOWALL, FOUNDWALL, EXPLORING };
 	enum RobotState currentState = NOWALL;
 
@@ -188,7 +190,7 @@ right_motor_set_speed(1000);
 			left_motor_set_speed(500);
 			delay_ms(500);
 
-			if SensorValue[3] - SensorValue[4] <= thresholdRear  || SensorValue[4] - SensorValue[3] <= thresholdRear {
+			if fabs( SensorValue[3] - SensorValue[4]) <= thresholdRear {
 				currentState = EXPLORING;
 
 						}
@@ -198,9 +200,21 @@ right_motor_set_speed(1000);
 			}
 		}
 
-
-		// needs to have an understanding of how far the robot has travelled in each axis
-
+	if currentState = NOWALL {
+		for (int i = 0; i <= 4; i++) 
+		set_rgb_led(allRGBs[i], 10 , 0 , 0 );
+	}
+	else if currentState = FOUNDWALL {
+		for (int i = 0; i <= 4; i++) 
+		set_rgb_led(allRGBs[i], 0 , 10 , 0 );
+	}
+	else if currentState = EXPLORING {
+		for (int i = 0; i <= 4; i++) 
+		set_rgb_led(allRGBs[i], 0 , 0 , 10);
+	}
+	
+	
+		
 	
 	}
 		
