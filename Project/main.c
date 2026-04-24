@@ -24,8 +24,6 @@ messagebus_t bus;
 MUTEX_DECL(bus_lock);
 CONDVAR_DECL(bus_condvar);
 
-
-
 // Initialising stuff
 
 int main(void){ 
@@ -38,45 +36,33 @@ int main(void){
     proximity_start(0);
     calibrate_ir();
 
+	//TOF
+	VL53L0X_start();
+
     //LED
     clear_leds();
     spi_comm_start();
 	
-
     //Motors
     motors_init();
 
 	//Bluetooth
 	serial_start();
 
-    
     // variable declarations
-	int front_right;
-	int front_left;
-	int corner_right;
-	int corner_left;
-	int side_right;
-	int side_left;
-	int wheelMult;
 	int strongest;
 	int strongest_ir;
 
-	int minir = 100;
+	int minir = 20;
 	int threshold = 1000;
 	int selecta;
 	int tof;
-	int tof_thresh=100;
+	int tof_thresh_base=100;
+	int tof_thresh;
 
 	while (1){ // infinite Main Loop!
 		while (get_selector() < 11){ // when selector >=11 robot wont move, if it was over 11 wheelspeed would be too high
-			wheelMult = get_selector()
-			front_right = get_calibrated_prox(0);
-			front_left = get_calibrated_prox(7);
-			corner_right = get_calibrated_prox(1);
-			corner_left = get_calibrated_prox(6);
-			side_right = get_calibrated_prox(2);
-			side_left = get_calibrated_prox(5);
-
+			
 			strongest = 0;
 
 			//find max value
@@ -92,7 +78,7 @@ int main(void){
 			// if it can see the object
 			if (strongest_ir>minir){
 				// if it is close enough already, stop then turn
-				if (strongest_ir>threshold){ // only runs when robot is super close
+				if (strongest_ir>threshold){ // only runs when robot is super close, turns on spot then stops
 					switch (strongest){
 						// turn until maximum is at front
 						case 0:// infront therefore do nothing
@@ -174,14 +160,28 @@ int main(void){
 							break;
 					}
 				}
-			} else{	
-			//else
+			} else{	// if ir cannot see it, revert to tof
+				//else
 				// find the object by spinning or whatever tof sensor
 
 				// get tof
-				//get selcta
+				//get selecta
 				//while tof is greater than threshold, spin
 				// once tof can see object, go forwards
+
+				tof = VL53L0X_get_dist_mm();
+				selecta = get_selector();
+				tof_thresh = selecta * tof_thresh_base;
+
+				if (tof>tof_thresh){
+					left_motor_set_speed(-500);
+					right_motor_set_speed(500);
+					
+				}else{
+					left_motor_set_speed(1000);
+					right_motor_set_speed(1000);
+				}
+			
 			}
 
 			
